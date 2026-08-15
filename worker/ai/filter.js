@@ -1,4 +1,4 @@
-import { containsExcluded, SAFE_FALLBACK_LINE } from './exclusions.js';
+import { containsExcluded, containsExcludedInDocumentation, SAFE_FALLBACK_LINE } from './exclusions.js';
 import { logSafetyEvent } from '../lib/db.js';
 
 /**
@@ -34,7 +34,10 @@ export async function generateFiltered({ generate, regenerate, fallback, db, pro
 /**
  * Filter a whole generated object (SOAP note, feedback block) by checking its
  * serialized text. Returns null if it is clean, or the offending label.
+ *
+ * Uses the documentation variant of the keyword pass, which permits a negated
+ * safety screen to be written down. See exclusions.js for why.
  */
 export function scanObject(obj) {
-  return containsExcluded(JSON.stringify(obj));
+  return containsExcludedInDocumentation(JSON.stringify(obj));
 }

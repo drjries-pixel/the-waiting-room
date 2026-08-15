@@ -134,7 +134,8 @@ export async function generateSoap({ env, db, profileId, persona, transcript, si
   let note;
   try {
     note = await call(null);
-  } catch {
+  } catch (err) {
+    console.error('[soap] falling back:', err?.message ?? String(err));
     return fallbackNote(persona);
   }
 

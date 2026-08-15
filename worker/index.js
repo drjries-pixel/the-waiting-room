@@ -335,26 +335,29 @@ async function handleFinish(env, profileId, visitId) {
     })
     .filter(Boolean);
 
-  const soap = await generateSoap({
-    env,
-    db: env.DB,
-    profileId,
-    persona,
-    transcript,
-    sideNotes: visit.side_notes,
-    visitNumber: visit.visit_number,
-  });
-
-  const score = await gradeVisit({
-    env,
-    db: env.DB,
-    profileId,
-    persona,
-    transcript,
-    sideNotes: visit.side_notes,
-    soap,
-    history,
-  });
+  // Concurrent, not sequential. These were chained when the grader still took
+  // the finished note as input; running them together roughly halves the wait
+  // on the one screen where a kid is sitting watching a spinner.
+  const [soap, score] = await Promise.all([
+    generateSoap({
+      env,
+      db: env.DB,
+      profileId,
+      persona,
+      transcript,
+      sideNotes: visit.side_notes,
+      visitNumber: visit.visit_number,
+    }),
+    gradeVisit({
+      env,
+      db: env.DB,
+      profileId,
+      persona,
+      transcript,
+      sideNotes: visit.side_notes,
+      history,
+    }),
+  ]);
 
   // Visit 1 sends them to the follow-up tab; visit 2 discharges them warmly.
   const nextState = visit.visit_number >= 2 ? 'discharged' : 'followup';

@@ -56,6 +56,56 @@ function MicButton({ onText, disabled }) {
   );
 }
 
+/**
+ * Writing up a visit takes ~20 seconds — two model calls running concurrently.
+ * That is a long time to watch a spinner when you are twelve, so the wait gets
+ * its own screen rather than a disabled button. The lines below describe work
+ * that is genuinely happening; none of them are stalling text.
+ */
+const FINISHING_LINES = [
+  'Reading back through the visit…',
+  'Writing up your note…',
+  'Looking at how it went…',
+  'Nearly there…',
+];
+
+function FinishingScreen({ patient }) {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(
+      () => setStep((n) => Math.min(n + 1, FINISHING_LINES.length - 1)),
+      6000,
+    );
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-paper px-6">
+      <div className="w-full max-w-sm text-center">
+        <div className="mx-auto mb-5 w-fit">
+          <Avatar seed={patient.avatar_seed} size={72} />
+        </div>
+        <h2 className="mb-2 font-serif text-xl">
+          Thanks for seeing {patient.first_name}.
+        </h2>
+        <p aria-live="polite" className="mb-6 text-muted">
+          {FINISHING_LINES[step]}
+        </p>
+        <div className="mx-auto h-1 w-40 overflow-hidden rounded-full bg-line">
+          <div
+            className="h-full rounded-full bg-sage transition-all duration-700 ease-out"
+            style={{ width: `${((step + 1) / FINISHING_LINES.length) * 100}%` }}
+          />
+        </div>
+        <p className="mt-6 text-xs text-muted">
+          Good notes take a moment. This is worth the wait.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Visit({ session, onFinished, onLeave }) {
   const { patient } = session;
   const [transcript, setTranscript] = useState(session.visit.transcript);
@@ -137,6 +187,7 @@ export default function Visit({ session, onFinished, onLeave }) {
   const wrappingUp = turnsLeft <= 5;
 
   if (paused) return <PauseCard onClose={onLeave} />;
+  if (finishing) return <FinishingScreen patient={patient} />;
 
   return (
     <div className="flex min-h-dvh flex-col bg-paper lg:pr-0">
@@ -322,10 +373,9 @@ export default function Visit({ session, onFinished, onLeave }) {
               <button
                 type="button"
                 onClick={finish}
-                disabled={finishing}
-                className="flex-1 rounded-xl bg-sage px-4 py-2.5 font-medium text-white transition-colors hover:bg-sage-deep disabled:opacity-60"
+                className="flex-1 rounded-xl bg-sage px-4 py-2.5 font-medium text-white transition-colors hover:bg-sage-deep"
               >
-                {finishing ? 'Writing…' : 'Finish visit'}
+                Finish visit
               </button>
             </div>
           </div>

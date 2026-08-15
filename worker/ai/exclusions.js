@@ -58,7 +58,10 @@ Never: anything other than a clear, calm no.`;
  * Each entry is [label, RegExp]. The label is what gets logged — never the text.
  */
 const FORBIDDEN = [
-  ['self_harm', /\b(suicid\w*|kill (?:myself|yourself|himself|herself|themselves)|end (?:it all|my life|your life)|take my own life|self[- ]?harm|cutting myself|hurt(?:ing)? myself|not want(?:ing)? to (?:be here|wake up|live)|better off dead|no reason to live)\b/i],
+  // Note the reflexives cover every person, not just "myself". Notes and
+  // feedback are written in the third person, so "a plan to hurt himself" has
+  // to be caught just as surely as "I want to hurt myself".
+  ['self_harm', /\b(suicid\w*|kill (?:myself|yourself|himself|herself|themselves)|end (?:it all|my life|your life)|take my own life|self[-\s]?harm|cutting (?:my|him|her|them)sel(?:f|ves)|(?:hurt|harm)(?:ing|ed)?\s+(?:my|him|her|them|your)sel(?:f|ves)|not want(?:ing)? to (?:be here|wake up|live)|better off dead|no reason to live)\b/i],
   ['violence', /\b(murder\w*|stab\w*|shoot(?:ing)?|shot (?:him|her|them)|gun|knife|weapon|strangl\w*|choke(?:d|ing)?|blood(?:y|ied)|corpse|died|dead|death|passed away|funeral)\b/i],
   ['abuse', /\b(abus\w*|molest\w*|assault\w*|rape|raped|beat(?:s|en|ing)? me|hit me|hurt me|touched me|trauma\w*|ptsd|flashback\w*)\b/i],
   ['substance', /\b(alcohol|drink(?:ing)? (?:too much|a lot|heavily)|drunk|booze|beer|wine|vodka|whiskey|hangover|weed|marijuana|cannabis|cocaine|heroin|meth|opioid\w*|pills? to (?:cope|relax|sleep)|smok(?:e|ing) (?:cigarettes?|a pack)|vap(?:e|ing)|nicotine|withdrawal|relapse|sober|rehab)\b/i],
@@ -79,6 +82,53 @@ export function containsExcluded(text) {
     if (pattern.test(text)) return label;
   }
   return null;
+}
+
+/**
+ * Documentation is not patient speech, and must not be filtered like it.
+ *
+ * A good clinical note records that the safety screen happened AND that it was
+ * negative — "denies any thoughts of hurting herself" is exactly what a
+ * competent note says. The raw keyword pass flags that phrasing, which meant
+ * the app rewarded her for asking the question and then destroyed the note that
+ * recorded the answer. Real bug, caught in smoke testing.
+ *
+ * So before scanning generated notes and feedback, neutralize safety-screen
+ * language that appears in NEGATED or documentary form. Anything asserting the
+ * content positively still trips the filter: "denies thoughts of self-harm"
+ * passes, "reports thoughts of self-harm" does not.
+ *
+ * This applies ONLY to documentation. Patient turns stay strict.
+ */
+const SAFETY_TERM = String.raw`(?:self[-\s]?harm|suicid\w*|(?:hurt|harm)(?:ing|ed)?\s+(?:my|him|her|them|your)sel(?:f|ves))`;
+
+const NEGATED_SAFETY_SCREEN = [
+  // negation first: "denies any thoughts of hurting herself", "no self-harm"
+  new RegExp(
+    String.raw`\b(?:den(?:y|ies|ied|ying)|no|not|never|without|negative for)\b[^.;\n]{0,60}?\b${SAFETY_TERM}`,
+    'gi',
+  ),
+  // term first: "thoughts of self-harm: denied"
+  new RegExp(String.raw`\b${SAFETY_TERM}\b[^.;\n]{0,30}?\b(?:denied|negative|none|absent)\b`, 'gi'),
+  // the screening question itself, which the feedback block quotes back to her
+  // as something she did well: "Have you had any thoughts of hurting yourself?"
+  new RegExp(
+    String.raw`\b(?:have you|do you|did you|has (?:s?he)|ask(?:ed|ing)?|screen(?:ed|ing)?|check(?:ed|ing)? in|inquired)\b[^.?;\n]{0,50}?\b${SAFETY_TERM}`,
+    'gi',
+  ),
+];
+
+/**
+ * @param {string} text — a generated note or feedback block.
+ * @returns {string|null} the label of the first rule that fired, or null.
+ */
+export function containsExcludedInDocumentation(text) {
+  if (!text) return null;
+  let neutralized = String(text);
+  for (const pattern of NEGATED_SAFETY_SCREEN) {
+    neutralized = neutralized.replace(pattern, ' [negative safety screen] ');
+  }
+  return containsExcluded(neutralized);
 }
 
 /**

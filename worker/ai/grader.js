@@ -81,8 +81,12 @@ THE SIX THINGS YOU SCORE (3 to 5 each)
   the growth area should be a warm nudge to try it next time.
 - explaining: Explaining Things Kindly. A 5 reflected back what she heard and
   explained things in plain words.
-- documentation: Documentation. A 5 wrote side notes that captured specifics
-  which then showed up in the note.
+- documentation: Documentation. A 5 wrote side notes during the visit that
+  captured specific, concrete details the patient actually said — the kind of
+  specifics that carry straight into a written note. Judge the notes against the
+  transcript. Only credit a detail if it genuinely appears in the conversation;
+  never praise her for capturing something the patient never said. If she wrote
+  no notes at all, this is a 3 with a warm nudge to try jotting things down.
 
 HARD RULES ON HOW YOU WRITE
 - Open with something specific she did well, and quote her actual words back to
@@ -99,7 +103,7 @@ HARD RULES ON HOW YOU WRITE
 
 ${EXCLUSIONS_BLOCK}`;
 
-function buildPrompt({ persona, transcript, sideNotes, soap, history }) {
+function buildPrompt({ persona, transcript, sideNotes, history }) {
   const lines = transcript
     .map((t) => `${t.role === 'clinician' ? 'STUDENT' : persona.name.toUpperCase()}: ${t.text}`)
     .join('\n');
@@ -115,9 +119,6 @@ ${lines}
 
 HER SIDE NOTES
 ${sideNotes && sideNotes.trim() ? sideNotes : '(none written)'}
-
-THE NOTE THAT CAME OUT OF IT
-${JSON.stringify({ subjective: soap.subjective, assessment: soap.assessment, plan: soap.plan })}
 
 HER RECENT SCORES
 ${historyLine}
@@ -141,9 +142,20 @@ function fallbackScore() {
   };
 }
 
-export async function gradeVisit({ env, db, profileId, persona, transcript, sideNotes, soap, history }) {
+/**
+ * Grades a visit from the transcript and side notes alone.
+ *
+ * It deliberately does NOT take the generated SOAP note. That dependency used
+ * to force this call to wait for the note to finish, which put two sequential
+ * model calls on the "Finish Visit" path and made it take ~40s. Nothing here
+ * actually needed the note — Documentation is a judgement about whether her
+ * notes captured what the patient said, which the transcript answers directly.
+ * Dropping it lets the two calls run concurrently and removes a class of error
+ * where the grader praised her for a detail the note never contained.
+ */
+export async function gradeVisit({ env, db, profileId, persona, transcript, sideNotes, history }) {
   const client = makeClient(env);
-  const prompt = buildPrompt({ persona, transcript, sideNotes, soap, history });
+  const prompt = buildPrompt({ persona, transcript, sideNotes, history });
 
   const call = (extra) =>
     askForJson(client, {
@@ -159,7 +171,11 @@ export async function gradeVisit({ env, db, profileId, persona, transcript, side
   let result;
   try {
     result = await call(null);
-  } catch {
+  } catch (err) {
+    // Never fail silently here. The fallback score is indistinguishable from a
+    // real low score at a glance, so without this line a broken grader looks
+    // like a bad visit.
+    console.error('[grader] falling back:', err?.message ?? String(err));
     result = fallbackScore();
   }
 
