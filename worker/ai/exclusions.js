@@ -81,9 +81,24 @@ const FORBIDDEN = [
   ['eating', /\b(anorex\w*|bulimi\w*|purg(?:e|ing)|binge(?:ing)?|throw(?:ing)? up (?:after|my food)|calorie\w*|starv(?:e|ing) myself|skip(?:ping)? meals to|too fat|too thin|gained \d+ pounds|lost \d+ pounds|my weight)\b/i],
   ['sexual', /\b(sex\w*|porn\w*|nude|naked|aroused|intimacy issues|affair|cheated on)\b/i],
   ['psychosis', /\b(voices? (?:telling|told|in my head)|command(?:ing)? me to|they'?re watching me|out to get me|conspir\w*|possessed|demons?)\b/i],
-  ['medication_detail', /\b(\d+\s?(?:mg|mcg|milligrams?)|titrat\w*|overdose\w*|toxic(?:ity)?|lethal dose|sertraline|fluoxetine|zoloft|prozac|lexapro|escitalopram|xanax|alprazolam|klonopin|ativan|adderall|ritalin|lithium|abilify|seroquel)\b/i],
+  // Dosing is excluded everywhere, always. Naming a drug is a separate matter -
+  // see MEDICATION_NAMES below.
+  ['medication_dosing', /\b(\d+\s?(?:mg|mcg|milligrams?)|titrat\w*|overdose\w*|toxic(?:ity)?|lethal dose|once (?:a|per) day|twice (?:a|per) day|three times (?:a|per) day|once daily|twice daily|take (?:it|this|one) with food)\b/i],
   ['profanity', /\b(fuck\w*|shit\w*|bitch|bastard|asshole|damn it|goddamn)\b/i],
 ];
+
+/**
+ * Drug names are blocked in PATIENT speech and allowed in documentation.
+ *
+ * The rule is §6.2's — the patient never names a medication, never diagnoses
+ * themselves, never suggests treatment. But the learner can now prescribe, and
+ * a note that records "started on sertraline" is correct documentation of what
+ * she did. Blocking the name everywhere would gut her own SOAP note.
+ *
+ * Dosing stays blocked on both sides regardless.
+ */
+const MEDICATION_NAMES =
+  /\b(sertraline|fluoxetine|escitalopram|citalopram|paroxetine|fluvoxamine|venlafaxine|duloxetine|desvenlafaxine|bupropion|mirtazapine|trazodone|vortioxetine|vilazodone|amitriptyline|nortriptyline|clomipramine|imipramine|phenelzine|tranylcypromine|selegiline|alprazolam|lorazepam|clonazepam|diazepam|buspirone|hydroxyzine|propranolol|lithium|lamotrigine|divalproex|valproic|carbamazepine|aripiprazole|quetiapine|risperidone|olanzapine|lurasidone|ziprasidone|methylphenidate|dexmethylphenidate|amphetamine|lisdexamfetamine|atomoxetine|guanfacine|clonidine|viloxazine|melatonin|ramelteon|zolpidem|eszopiclone|doxepin|suvorexant|zoloft|prozac|lexapro|celexa|paxil|luvox|effexor|cymbalta|pristiq|wellbutrin|remeron|desyrel|trintellix|viibryd|elavil|pamelor|anafranil|tofranil|nardil|parnate|emsam|xanax|ativan|klonopin|valium|buspar|vistaril|inderal|lithobid|lamictal|depakote|tegretol|abilify|seroquel|risperdal|zyprexa|latuda|geodon|ritalin|concerta|focalin|adderall|vyvanse|strattera|intuniv|kapvay|qelbree|rozerem|ambien|lunesta|silenor|belsomra)\b/i;
 
 /**
  * @param {string} text
@@ -94,6 +109,7 @@ export function containsExcluded(text) {
   for (const [label, pattern] of FORBIDDEN) {
     if (pattern.test(text)) return label;
   }
+  if (MEDICATION_NAMES.test(text)) return 'medication_name';
   return null;
 }
 
@@ -141,7 +157,12 @@ export function containsExcludedInDocumentation(text) {
   for (const pattern of NEGATED_SAFETY_SCREEN) {
     neutralized = neutralized.replace(pattern, ' [negative safety screen] ');
   }
-  return containsExcluded(neutralized);
+  // Deliberately does NOT check MEDICATION_NAMES: a note recording what she
+  // prescribed is correct documentation. Dosing is still caught by FORBIDDEN.
+  for (const [label, pattern] of FORBIDDEN) {
+    if (pattern.test(neutralized)) return label;
+  }
+  return null;
 }
 
 /**

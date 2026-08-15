@@ -3,6 +3,8 @@ import { api } from '../api.js';
 import Avatar from '../components/Avatar.jsx';
 import MedSidebar from '../components/MedSidebar.jsx';
 import PauseCard from '../components/PauseCard.jsx';
+import { composePrescription } from '../prescribe.js';
+import library from '../content/medications.json';
 
 /** Feature-detect once. Never render a mic button that cannot work (§12). */
 const SpeechRecognition =
@@ -119,6 +121,7 @@ export default function Visit({ session, onFinished, onLeave }) {
   const [confirmFinish, setConfirmFinish] = useState(false);
   const [finishing, setFinishing] = useState(false);
   const [turnsUsed, setTurnsUsed] = useState(session.visit.turns_used ?? 0);
+  const [dragOver, setDragOver] = useState(false);
 
   const turnsAllowed = session.visit.turns_allowed ?? 30;
   const bottomRef = useRef(null);
@@ -167,6 +170,24 @@ export default function Visit({ session, onFinished, onLeave }) {
     },
     [session.visit.id, thinking],
   );
+
+  /** Send a prescription as her turn — it is a clinical action, so it costs a turn. */
+  const prescribe = useCallback(
+    (med) => {
+      if (!med || thinking || turnsUsed >= turnsAllowed) return;
+      setMedsOpen(false);
+      send(composePrescription(med, patient.first_name));
+    },
+    [send, thinking, turnsUsed, turnsAllowed, patient.first_name],
+  );
+
+  function onDrop(e) {
+    e.preventDefault();
+    setDragOver(false);
+    const generic = e.dataTransfer.getData('application/x-medication');
+    const med = library.medications.find((m) => m.generic === generic);
+    if (med) prescribe(med);
+  }
 
   async function finish() {
     setFinishing(true);
@@ -228,8 +249,30 @@ export default function Visit({ session, onFinished, onLeave }) {
 
       <div className="mx-auto flex w-full max-w-6xl flex-1 gap-6 px-4">
         {/* chat column */}
-        <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col">
-          <div className="flex-1 space-y-3 py-5">
+        <div
+          className="mx-auto flex w-full max-w-3xl flex-1 flex-col"
+          onDragOver={(e) => {
+            if (e.dataTransfer.types.includes('application/x-medication')) {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = 'copy';
+              setDragOver(true);
+            }
+          }}
+          onDragLeave={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) setDragOver(false);
+          }}
+          onDrop={onDrop}
+        >
+          <div
+            className={`flex-1 space-y-3 py-5 ${
+              dragOver ? 'rounded-2xl outline-2 outline-dashed outline-offset-4 outline-sage' : ''
+            }`}
+          >
+            {dragOver && (
+              <p className="rounded-xl bg-sage-soft px-4 py-3 text-center text-sm text-sage-deep">
+                Drop to prescribe it to {patient.first_name}
+              </p>
+            )}
             {transcript.map((entry, i) => (
               <div
                 key={i}
@@ -382,7 +425,7 @@ export default function Visit({ session, onFinished, onLeave }) {
         </div>
       )}
 
-      <MedSidebar open={medsOpen} onClose={() => setMedsOpen(false)} />
+      <MedSidebar open={medsOpen} onClose={() => setMedsOpen(false)} onPrescribe={prescribe} />
     </div>
   );
 }

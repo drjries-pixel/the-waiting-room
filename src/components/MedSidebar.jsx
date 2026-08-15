@@ -35,7 +35,15 @@ function ChipRow({ label, options, selected, onToggle }) {
   );
 }
 
-export default function MedSidebar({ open, onClose }) {
+/**
+ * `onPrescribe` is only passed during a visit. When absent the sidebar is a
+ * plain reference book.
+ *
+ * Note the tap-to-prescribe button is not a fallback — it is the primary path.
+ * HTML5 drag and drop does not work in iOS Safari at all, and an iPhone is the
+ * target device. Dragging is the desktop nicety.
+ */
+export default function MedSidebar({ open, onClose, onPrescribe }) {
   const [query, setQuery] = useState('');
   const [types, setTypes] = useState([]);
   const [classes, setClasses] = useState([]);
@@ -135,7 +143,21 @@ export default function MedSidebar({ open, onClose }) {
           {results.map((m) => {
             const isOpen = expanded === m.generic;
             return (
-              <li key={m.generic} className="rounded-xl border border-line bg-card">
+              <li
+                key={m.generic}
+                draggable={Boolean(onPrescribe)}
+                onDragStart={
+                  onPrescribe
+                    ? (e) => {
+                        e.dataTransfer.setData('application/x-medication', m.generic);
+                        e.dataTransfer.effectAllowed = 'copy';
+                      }
+                    : undefined
+                }
+                className={`rounded-xl border border-line bg-card ${
+                  onPrescribe ? 'cursor-grab active:cursor-grabbing' : ''
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => setExpanded(isOpen ? null : m.generic)}
@@ -151,7 +173,7 @@ export default function MedSidebar({ open, onClose }) {
                   <div className="rise border-t border-line px-3 py-2.5 text-sm">
                     <p className="mb-2">{m.how_it_works}</p>
                     <p className="mb-2 text-muted">{m.good_to_know}</p>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="mb-3 flex flex-wrap gap-1.5">
                       {m.treats.map((t) => (
                         <span
                           key={t}
@@ -161,6 +183,15 @@ export default function MedSidebar({ open, onClose }) {
                         </span>
                       ))}
                     </div>
+                    {onPrescribe && (
+                      <button
+                        type="button"
+                        onClick={() => onPrescribe(m)}
+                        className="w-full rounded-lg border border-sage bg-sage-soft px-3 py-2 text-sm font-medium text-sage-deep transition-colors hover:bg-sage hover:text-white"
+                      >
+                        Prescribe {m.generic}
+                      </button>
+                    )}
                   </div>
                 )}
               </li>

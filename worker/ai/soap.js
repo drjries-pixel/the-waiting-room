@@ -64,8 +64,12 @@ SECTION GUIDANCE
 - Assessment: a plain-language summary of the pattern. Describe the picture; do
   not hand down a formal diagnosis, and never name a medication.
 - Plan: sensible, general next steps a caring clinician would suggest — talking
-  more, tracking sleep, a follow-up visit. Categories only. Never a specific
-  medication, dose, or schedule.
+  more, tracking sleep, a follow-up visit. If she prescribed a medication during
+  the visit, record it by name the way a real note would ("Started on
+  sertraline."), because that is what she actually did. Never
+  record a dose, a frequency, or a schedule, and do not remark on their absence
+  either — a note that explains what it is leaving out reads like a disclaimer
+  rather than a note.
 
 THE GAPS ARRAY
 List what she would have learned by asking more. Phrase every entry as an
