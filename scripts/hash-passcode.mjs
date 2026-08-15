@@ -11,7 +11,9 @@
  * The hash format here must stay in lockstep with worker/lib/auth.js.
  */
 
-const ITERATIONS = 210_000;
+// Must match PBKDF2_ITERATIONS in worker/lib/auth.js. 100,000 is the maximum
+// the Workers runtime accepts — higher values throw at login time.
+const ITERATIONS = 100_000;
 const [, , profileId, displayName, passcode] = process.argv;
 
 if (!profileId || !displayName || !passcode) {

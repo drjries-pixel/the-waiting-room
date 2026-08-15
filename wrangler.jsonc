@@ -6,14 +6,24 @@
   // several accounts — same login is fine, same account is not.
   // Run `wrangler whoami` and confirm the account before the first deploy.
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "the-waiting-room",
+
+  // The deployed URL is <name>.<your-workers.dev-subdomain>.workers.dev, so
+  // this name is half the address people read. Keep it short.
+  "name": "waitingroom",
   "main": "worker/index.js",
   "compatibility_date": "2026-08-01",
   "compatibility_flags": ["nodejs_compat"],
 
-  // Paste the account's ID here before the first deploy. Pinning it stops any
-  // wrangler wrapper from silently targeting a different account.
-  "account_id": "REPLACE_WITH_ACCOUNT_ID",
+  // Pinned so no wrangler wrapper can silently target a different account.
+  // Not a credential — an account ID grants nothing without a scoped token.
+  "account_id": "dafe1bb562df74f84598e73eca7c9c5c",
+
+  // Both stated explicitly rather than left to defaults. workers.dev is the
+  // one address this app is reachable at; preview URLs would publish an
+  // additional public address per deployed version, which is more surface than
+  // a single-user app needs.
+  "workers_dev": true,
+  "preview_urls": false,
 
   "assets": {
     "directory": "./dist",
@@ -25,8 +35,7 @@
     {
       "binding": "DB",
       "database_name": "waiting-room",
-      // Paste the ID printed by `wrangler d1 create waiting-room`.
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+      "database_id": "8d6e2439-9c18-4a1d-aa1b-8a0cddeef691"
     }
   ],
 

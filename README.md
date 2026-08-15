@@ -202,12 +202,12 @@ schema.sql              includes a safety_event table that stores labels, never 
 
 | # | Question | Status |
 |---|---|---|
-| 1 | Cloudflare account | Decided — a dedicated account. Placeholders in `wrangler.jsonc` are waiting for the IDs. |
+| 1 | Cloudflare account | **Done.** Deployed into a dedicated account; account and database IDs are pinned in `wrangler.jsonc`. Neither is a credential. |
 | 2 | Parent notification on the pause card | **Built, off by default.** Set the `PARENT_ALERT_WEBHOOK` var to enable. The ping carries the app name, the event, and a timestamp — no message text, no transcript, no detail. |
 | 3 | Evidence pack approach | Not started. The curated-and-signed recommendation is what the code assumes. |
 | 4 | Content review gate | **Blocking Phase 5.** Both content files carry a `_meta.status` of `DRAFT — NOT REVIEWED`. Medication entries have no dosing, titration, or toxicity by construction. |
 | 5 | Additional profiles | Schema is already multi-profile; adding one is a single `hash-passcode.mjs` run. |
-| 6 | Domain | Not started. Deploys to `*.workers.dev`. |
+| 6 | Domain | Running on the default `*.workers.dev` address. No custom domain; preview URLs are explicitly disabled so there is exactly one public address. |
 
 ---
 

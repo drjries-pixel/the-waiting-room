@@ -9,7 +9,12 @@ import {
   verifyToken,
 } from './lib/auth.js';
 import { getPatient, getProfile, listRoomPatients, newId, nowIso, openVisitFor } from './lib/db.js';
-import { MAX_TURNS_PER_VISIT, consumeTurn, pruneRateLimits } from './lib/rateLimit.js';
+import {
+  MAX_TURNS_PER_VISIT,
+  consumeLoginAttempt,
+  consumeTurn,
+  pruneRateLimits,
+} from './lib/rateLimit.js';
 import { TIER_1_PATIENTS } from './data/patients.js';
 import { patientReply } from './ai/patientTurn.js';
 import { generateSoap } from './ai/soap.js';
@@ -99,7 +104,16 @@ async function handleLogin(request, env) {
   const body = await readJson(request);
   if (!body?.profile_id || !body?.passcode) return fail(400, 'bad_request', 'Missing name or passcode.');
 
-  const profile = await getProfile(env.DB, String(body.profile_id).toLowerCase().trim());
+  const profileId = String(body.profile_id).toLowerCase().trim();
+
+  // Throttle before doing any work, so guessing costs an attacker attempts
+  // rather than CPU. This is the real defence for a short passcode.
+  const allowed = await consumeLoginAttempt(env.DB, profileId, request.headers.get('cf-connecting-ip'));
+  if (!allowed) {
+    return fail(429, 'too_many_attempts', "That's a lot of tries. Give it fifteen minutes and try again.");
+  }
+
+  const profile = await getProfile(env.DB, profileId);
   // Same message either way — never confirm which half was wrong.
   const generic = fail(401, 'bad_credentials', "That name and passcode don't match.");
   if (!profile) return generic;

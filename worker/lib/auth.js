@@ -94,7 +94,16 @@ export function readCookie(request, name) {
 /* Passcode hashing — PBKDF2-SHA256. scrypt is not available in Workers. */
 /* ------------------------------------------------------------------ */
 
-const PBKDF2_ITERATIONS = 210_000;
+/**
+ * 100,000 is the ceiling, not a preference: the Workers runtime rejects
+ * anything higher with "Pbkdf2 failed: iteration counts above 100000 are not
+ * supported". Miniflare does NOT enforce this, so a larger value works fine in
+ * local dev and then throws on every login in production.
+ *
+ * scripts/hash-passcode.mjs hardcodes the same number and must stay in lockstep
+ * — a mismatch produces hashes that silently never verify.
+ */
+const PBKDF2_ITERATIONS = 100_000;
 
 export async function hashPasscode(passcode, saltBytes) {
   const salt = saltBytes ?? crypto.getRandomValues(new Uint8Array(16));
