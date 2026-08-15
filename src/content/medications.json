@@ -1,0 +1,853 @@
+{
+  "_meta": {
+    "status": "DRAFT — NOT REVIEWED",
+    "review_gate": "This file must get a physician review pass before it is shown to a learner. Do not ship without it.",
+    "rules": "No dosing. No titration. No 'how to take it'. No overdose or toxicity information. Educational one-liners only.",
+    "version": 1
+  },
+  "types": [
+    "Antidepressant",
+    "Anti-anxiety",
+    "Mood Stabilizer",
+    "Antipsychotic",
+    "Stimulant / ADHD",
+    "Sleep"
+  ],
+  "classes": [
+    "SSRI",
+    "SNRI",
+    "Atypical antidepressant",
+    "TCA",
+    "MAOI",
+    "Benzodiazepine",
+    "Buspirone",
+    "Beta blocker",
+    "Antihistamine",
+    "Lithium",
+    "Anticonvulsant mood stabilizer",
+    "Atypical antipsychotic",
+    "Methylphenidate",
+    "Amphetamine",
+    "Non-stimulant ADHD",
+    "Melatonin agonist",
+    "Sedative-hypnotic",
+    "Orexin blocker"
+  ],
+  "mechanisms": [
+    "Serotonin",
+    "Norepinephrine",
+    "Dopamine",
+    "GABA",
+    "Histamine",
+    "Melatonin",
+    "Orexin",
+    "Multiple"
+  ],
+  "conditions": [
+    "Depression",
+    "Generalized Anxiety",
+    "Panic Disorder",
+    "Social Anxiety",
+    "OCD",
+    "Specific Phobia",
+    "Insomnia",
+    "ADHD",
+    "Bipolar Disorder",
+    "PTSD",
+    "Schizophrenia"
+  ],
+  "medications": [
+    {
+      "generic": "sertraline",
+      "brand": "Zoloft",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Helps keep more serotonin available between brain cells, which can steady mood over several weeks.",
+      "treats": [
+        "Depression",
+        "Generalized Anxiety",
+        "Panic Disorder",
+        "OCD",
+        "Social Anxiety",
+        "PTSD"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Usually takes 4–6 weeks to show its full effect."
+    },
+    {
+      "generic": "fluoxetine",
+      "brand": "Prozac",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Keeps more serotonin available between brain cells.",
+      "treats": [
+        "Depression",
+        "OCD",
+        "Panic Disorder",
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Stays in the body longer than most others in its family."
+    },
+    {
+      "generic": "escitalopram",
+      "brand": "Lexapro",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Keeps more serotonin available between brain cells.",
+      "treats": [
+        "Depression",
+        "Generalized Anxiety",
+        "Panic Disorder",
+        "Social Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Often chosen when someone is dealing with both low mood and worry."
+    },
+    {
+      "generic": "citalopram",
+      "brand": "Celexa",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Keeps more serotonin available between brain cells.",
+      "treats": [
+        "Depression",
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "A close relative of escitalopram."
+    },
+    {
+      "generic": "paroxetine",
+      "brand": "Paxil",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Keeps more serotonin available between brain cells.",
+      "treats": [
+        "Depression",
+        "Panic Disorder",
+        "Social Anxiety",
+        "OCD",
+        "PTSD"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Needs to be stopped slowly rather than all at once."
+    },
+    {
+      "generic": "fluvoxamine",
+      "brand": "Luvox",
+      "type": "Antidepressant",
+      "class": "SSRI",
+      "how_it_works": "Keeps more serotonin available between brain cells.",
+      "treats": [
+        "OCD",
+        "Social Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Used most often for OCD."
+    },
+    {
+      "generic": "venlafaxine",
+      "brand": "Effexor",
+      "type": "Antidepressant",
+      "class": "SNRI",
+      "how_it_works": "Keeps more of two messengers available — serotonin and norepinephrine.",
+      "treats": [
+        "Depression",
+        "Generalized Anxiety",
+        "Panic Disorder",
+        "Social Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Needs to be stopped slowly rather than all at once."
+    },
+    {
+      "generic": "duloxetine",
+      "brand": "Cymbalta",
+      "type": "Antidepressant",
+      "class": "SNRI",
+      "how_it_works": "Keeps more serotonin and norepinephrine available.",
+      "treats": [
+        "Depression",
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Also used for some kinds of long-lasting physical pain."
+    },
+    {
+      "generic": "desvenlafaxine",
+      "brand": "Pristiq",
+      "type": "Antidepressant",
+      "class": "SNRI",
+      "how_it_works": "Keeps more serotonin and norepinephrine available.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine"
+      ],
+      "good_to_know": "A close relative of venlafaxine."
+    },
+    {
+      "generic": "bupropion",
+      "brand": "Wellbutrin",
+      "type": "Antidepressant",
+      "class": "Atypical antidepressant",
+      "how_it_works": "Works on dopamine and norepinephrine rather than serotonin.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Tends to be energizing rather than sedating."
+    },
+    {
+      "generic": "mirtazapine",
+      "brand": "Remeron",
+      "type": "Antidepressant",
+      "class": "Atypical antidepressant",
+      "how_it_works": "Nudges serotonin and norepinephrine signalling in a different way from the SSRIs.",
+      "treats": [
+        "Depression",
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine",
+        "Histamine"
+      ],
+      "good_to_know": "Often makes people sleepy, so it is usually taken at night."
+    },
+    {
+      "generic": "trazodone",
+      "brand": "Desyrel",
+      "type": "Antidepressant",
+      "class": "Atypical antidepressant",
+      "how_it_works": "Affects serotonin signalling and is strongly sedating.",
+      "treats": [
+        "Depression",
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Histamine"
+      ],
+      "good_to_know": "Used far more often for sleep than for mood."
+    },
+    {
+      "generic": "vortioxetine",
+      "brand": "Trintellix",
+      "type": "Antidepressant",
+      "class": "Atypical antidepressant",
+      "how_it_works": "Acts on several different serotonin receptors at once.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Sometimes chosen when concentration is a big part of the problem."
+    },
+    {
+      "generic": "vilazodone",
+      "brand": "Viibryd",
+      "type": "Antidepressant",
+      "class": "Atypical antidepressant",
+      "how_it_works": "Combines an SSRI-like effect with an extra action on one serotonin receptor.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Usually taken with food."
+    },
+    {
+      "generic": "amitriptyline",
+      "brand": "Elavil",
+      "type": "Antidepressant",
+      "class": "TCA",
+      "how_it_works": "An older medicine that raises serotonin and norepinephrine, plus several other effects.",
+      "treats": [
+        "Depression",
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine",
+        "Histamine"
+      ],
+      "good_to_know": "One of the first antidepressants ever made; still used today, often for other reasons."
+    },
+    {
+      "generic": "nortriptyline",
+      "brand": "Pamelor",
+      "type": "Antidepressant",
+      "class": "TCA",
+      "how_it_works": "Raises norepinephrine more than serotonin.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Norepinephrine",
+        "Serotonin"
+      ],
+      "good_to_know": "Generally easier to tolerate than older members of its family."
+    },
+    {
+      "generic": "clomipramine",
+      "brand": "Anafranil",
+      "type": "Antidepressant",
+      "class": "TCA",
+      "how_it_works": "The most serotonin-focused of the older antidepressants.",
+      "treats": [
+        "OCD",
+        "Depression"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Was the first medicine shown to help OCD."
+    },
+    {
+      "generic": "imipramine",
+      "brand": "Tofranil",
+      "type": "Antidepressant",
+      "class": "TCA",
+      "how_it_works": "Raises serotonin and norepinephrine.",
+      "treats": [
+        "Depression",
+        "Panic Disorder"
+      ],
+      "mechanisms": [
+        "Serotonin",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Historically important — it helped show that panic attacks respond to medicine."
+    },
+    {
+      "generic": "phenelzine",
+      "brand": "Nardil",
+      "type": "Antidepressant",
+      "class": "MAOI",
+      "how_it_works": "Blocks an enzyme that breaks down several brain messengers, so more of them stay around.",
+      "treats": [
+        "Depression",
+        "Social Anxiety"
+      ],
+      "mechanisms": [
+        "Multiple"
+      ],
+      "good_to_know": "Comes with a list of foods and other medicines to avoid, so it is used carefully."
+    },
+    {
+      "generic": "tranylcypromine",
+      "brand": "Parnate",
+      "type": "Antidepressant",
+      "class": "MAOI",
+      "how_it_works": "Blocks the enzyme that breaks down several brain messengers.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Multiple"
+      ],
+      "good_to_know": "Usually kept for depression that has not responded to other options."
+    },
+    {
+      "generic": "selegiline (patch)",
+      "brand": "Emsam",
+      "type": "Antidepressant",
+      "class": "MAOI",
+      "how_it_works": "Same idea as other MAOIs, but delivered through a skin patch.",
+      "treats": [
+        "Depression"
+      ],
+      "mechanisms": [
+        "Multiple",
+        "Dopamine"
+      ],
+      "good_to_know": "The patch form skips the stomach, which changes what needs to be avoided."
+    },
+    {
+      "generic": "alprazolam",
+      "brand": "Xanax",
+      "type": "Anti-anxiety",
+      "class": "Benzodiazepine",
+      "how_it_works": "Boosts GABA, the brain's main calming signal, which quiets things down quickly.",
+      "treats": [
+        "Panic Disorder",
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Works within minutes, which is why it is generally used short-term."
+    },
+    {
+      "generic": "lorazepam",
+      "brand": "Ativan",
+      "type": "Anti-anxiety",
+      "class": "Benzodiazepine",
+      "how_it_works": "Boosts the brain's calming GABA signal.",
+      "treats": [
+        "Generalized Anxiety",
+        "Panic Disorder"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Fast-acting and short-lasting."
+    },
+    {
+      "generic": "clonazepam",
+      "brand": "Klonopin",
+      "type": "Anti-anxiety",
+      "class": "Benzodiazepine",
+      "how_it_works": "Boosts the brain's calming GABA signal.",
+      "treats": [
+        "Panic Disorder",
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Lasts longer in the body than most of its relatives."
+    },
+    {
+      "generic": "diazepam",
+      "brand": "Valium",
+      "type": "Anti-anxiety",
+      "class": "Benzodiazepine",
+      "how_it_works": "Boosts the brain's calming GABA signal.",
+      "treats": [
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "One of the oldest medicines in this family."
+    },
+    {
+      "generic": "buspirone",
+      "brand": "BuSpar",
+      "type": "Anti-anxiety",
+      "class": "Buspirone",
+      "how_it_works": "Acts on a particular serotonin receptor rather than on GABA.",
+      "treats": [
+        "Generalized Anxiety"
+      ],
+      "mechanisms": [
+        "Serotonin"
+      ],
+      "good_to_know": "Builds up slowly over weeks instead of working right away."
+    },
+    {
+      "generic": "hydroxyzine",
+      "brand": "Vistaril",
+      "type": "Anti-anxiety",
+      "class": "Antihistamine",
+      "how_it_works": "Blocks histamine, which has a calming and sleepy side effect.",
+      "treats": [
+        "Generalized Anxiety",
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Histamine"
+      ],
+      "good_to_know": "Related to allergy medicines."
+    },
+    {
+      "generic": "propranolol",
+      "brand": "Inderal",
+      "type": "Anti-anxiety",
+      "class": "Beta blocker",
+      "how_it_works": "Blocks adrenaline's effect on the body, so the heart pounding and shaky hands settle.",
+      "treats": [
+        "Social Anxiety",
+        "Specific Phobia"
+      ],
+      "mechanisms": [
+        "Norepinephrine"
+      ],
+      "good_to_know": "Works on the physical part of fear, not on the worrying thoughts."
+    },
+    {
+      "generic": "lithium",
+      "brand": "Lithobid",
+      "type": "Mood Stabilizer",
+      "class": "Lithium",
+      "how_it_works": "A simple mineral salt that steadies mood swings; exactly how it does this is still being studied.",
+      "treats": [
+        "Bipolar Disorder",
+        "Depression"
+      ],
+      "mechanisms": [
+        "Multiple"
+      ],
+      "good_to_know": "Needs regular blood tests while someone is taking it."
+    },
+    {
+      "generic": "lamotrigine",
+      "brand": "Lamictal",
+      "type": "Mood Stabilizer",
+      "class": "Anticonvulsant mood stabilizer",
+      "how_it_works": "Calms overactive electrical signalling in the brain.",
+      "treats": [
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Multiple"
+      ],
+      "good_to_know": "Started very slowly, because of a rash that needs to be watched for."
+    },
+    {
+      "generic": "divalproex sodium",
+      "brand": "Depakote",
+      "type": "Mood Stabilizer",
+      "class": "Anticonvulsant mood stabilizer",
+      "how_it_works": "Raises GABA activity and steadies electrical signalling.",
+      "treats": [
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Originally developed as a seizure medicine."
+    },
+    {
+      "generic": "carbamazepine",
+      "brand": "Tegretol",
+      "type": "Mood Stabilizer",
+      "class": "Anticonvulsant mood stabilizer",
+      "how_it_works": "Steadies electrical signalling in nerve cells.",
+      "treats": [
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Multiple"
+      ],
+      "good_to_know": "Interacts with a lot of other medicines."
+    },
+    {
+      "generic": "aripiprazole",
+      "brand": "Abilify",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Steadies dopamine signalling — turning it down where it is too high and up where it is too low.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder",
+        "Depression"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin"
+      ],
+      "good_to_know": "Sometimes added to an antidepressant when that alone is not enough."
+    },
+    {
+      "generic": "quetiapine",
+      "brand": "Seroquel",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Blocks certain dopamine and serotonin receptors.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin",
+        "Histamine"
+      ],
+      "good_to_know": "Often quite sedating."
+    },
+    {
+      "generic": "risperidone",
+      "brand": "Risperdal",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Blocks certain dopamine and serotonin receptors.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin"
+      ],
+      "good_to_know": "One of the most widely used medicines in its family."
+    },
+    {
+      "generic": "olanzapine",
+      "brand": "Zyprexa",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Blocks several dopamine and serotonin receptors.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin",
+        "Histamine"
+      ],
+      "good_to_know": "Effective, but weight and blood sugar need watching."
+    },
+    {
+      "generic": "lurasidone",
+      "brand": "Latuda",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Blocks certain dopamine and serotonin receptors.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin"
+      ],
+      "good_to_know": "Taken with food so the body can absorb it properly."
+    },
+    {
+      "generic": "ziprasidone",
+      "brand": "Geodon",
+      "type": "Antipsychotic",
+      "class": "Atypical antipsychotic",
+      "how_it_works": "Blocks certain dopamine and serotonin receptors.",
+      "treats": [
+        "Schizophrenia",
+        "Bipolar Disorder"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Serotonin"
+      ],
+      "good_to_know": "Less likely than some relatives to cause weight gain."
+    },
+    {
+      "generic": "methylphenidate",
+      "brand": "Ritalin, Concerta",
+      "type": "Stimulant / ADHD",
+      "class": "Methylphenidate",
+      "how_it_works": "Increases dopamine and norepinephrine in the parts of the brain that handle focus.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Works the same day rather than over weeks."
+    },
+    {
+      "generic": "dexmethylphenidate",
+      "brand": "Focalin",
+      "type": "Stimulant / ADHD",
+      "class": "Methylphenidate",
+      "how_it_works": "A refined version of methylphenidate that raises dopamine and norepinephrine.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Closely related to Ritalin."
+    },
+    {
+      "generic": "amphetamine salts",
+      "brand": "Adderall",
+      "type": "Stimulant / ADHD",
+      "class": "Amphetamine",
+      "how_it_works": "Increases dopamine and norepinephrine activity, improving focus and follow-through.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Norepinephrine"
+      ],
+      "good_to_know": "Comes in short-acting and long-acting versions."
+    },
+    {
+      "generic": "lisdexamfetamine",
+      "brand": "Vyvanse",
+      "type": "Stimulant / ADHD",
+      "class": "Amphetamine",
+      "how_it_works": "Inactive until the body converts it, then raises dopamine and norepinephrine.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Dopamine",
+        "Norepinephrine"
+      ],
+      "good_to_know": "The slow conversion gives it a smoother, longer effect."
+    },
+    {
+      "generic": "atomoxetine",
+      "brand": "Strattera",
+      "type": "Stimulant / ADHD",
+      "class": "Non-stimulant ADHD",
+      "how_it_works": "Raises norepinephrine only — no stimulant effect.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Norepinephrine"
+      ],
+      "good_to_know": "Takes several weeks to work, unlike the stimulants."
+    },
+    {
+      "generic": "guanfacine",
+      "brand": "Intuniv",
+      "type": "Stimulant / ADHD",
+      "class": "Non-stimulant ADHD",
+      "how_it_works": "Acts on norepinephrine receptors in the front of the brain, which helps with impulse control.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Norepinephrine"
+      ],
+      "good_to_know": "Can be calming, so it is sometimes taken in the evening."
+    },
+    {
+      "generic": "clonidine",
+      "brand": "Kapvay",
+      "type": "Stimulant / ADHD",
+      "class": "Non-stimulant ADHD",
+      "how_it_works": "Turns down norepinephrine signalling.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Norepinephrine"
+      ],
+      "good_to_know": "Was originally a blood pressure medicine."
+    },
+    {
+      "generic": "viloxazine",
+      "brand": "Qelbree",
+      "type": "Stimulant / ADHD",
+      "class": "Non-stimulant ADHD",
+      "how_it_works": "Raises norepinephrine without a stimulant effect.",
+      "treats": [
+        "ADHD"
+      ],
+      "mechanisms": [
+        "Norepinephrine"
+      ],
+      "good_to_know": "One of the newer options for ADHD."
+    },
+    {
+      "generic": "melatonin",
+      "brand": "(sold over the counter)",
+      "type": "Sleep",
+      "class": "Melatonin agonist",
+      "how_it_works": "Copies the hormone the brain releases at dusk to signal that it is night.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Melatonin"
+      ],
+      "good_to_know": "Helps most with the timing of sleep rather than the depth of it."
+    },
+    {
+      "generic": "ramelteon",
+      "brand": "Rozerem",
+      "type": "Sleep",
+      "class": "Melatonin agonist",
+      "how_it_works": "Acts on the brain's melatonin receptors more strongly than melatonin itself.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Melatonin"
+      ],
+      "good_to_know": "Aimed at trouble falling asleep rather than staying asleep."
+    },
+    {
+      "generic": "zolpidem",
+      "brand": "Ambien",
+      "type": "Sleep",
+      "class": "Sedative-hypnotic",
+      "how_it_works": "Boosts the brain's calming GABA signal in a way tuned toward sleep.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Meant for short stretches, not indefinitely."
+    },
+    {
+      "generic": "eszopiclone",
+      "brand": "Lunesta",
+      "type": "Sleep",
+      "class": "Sedative-hypnotic",
+      "how_it_works": "Boosts the brain's calming GABA signal.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "GABA"
+      ],
+      "good_to_know": "Lasts a bit longer through the night than zolpidem."
+    },
+    {
+      "generic": "doxepin (low dose)",
+      "brand": "Silenor",
+      "type": "Sleep",
+      "class": "Antihistamine",
+      "how_it_works": "At a very small amount it blocks histamine, which helps people stay asleep.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Histamine"
+      ],
+      "good_to_know": "The same molecule works as an antidepressant at much larger amounts."
+    },
+    {
+      "generic": "suvorexant",
+      "brand": "Belsomra",
+      "type": "Sleep",
+      "class": "Orexin blocker",
+      "how_it_works": "Blocks orexin, the signal that keeps the brain awake, instead of forcing sleep.",
+      "treats": [
+        "Insomnia"
+      ],
+      "mechanisms": [
+        "Orexin"
+      ],
+      "good_to_know": "A newer approach — it turns down wakefulness rather than turning up sleepiness."
+    }
+  ]
+}

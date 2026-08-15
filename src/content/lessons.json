@@ -1,0 +1,436 @@
+{
+  "_meta": {
+    "status": "DRAFT — NOT REVIEWED",
+    "review_gate": "Physician review pass required before this is shown to a learner.",
+    "version": 1
+  },
+  "lessons": [
+    {
+      "key": "active-listening",
+      "title": "Active Listening & Open-Ended Questions",
+      "minutes": 6,
+      "what_it_is": "Active listening means showing someone you actually heard them, not just waiting for your turn to talk. Its best tool is the open-ended question — one that can't be answered with yes or no.",
+      "why_it_helps": "A closed question gets you one fact. An open question gets you the story, and the story is where the answer usually is. People also tell you more when they can feel you listening, so the two work together.",
+      "example": {
+        "intro": "Two versions of the same moment. Watch how much more comes back in the second one.",
+        "turns": [
+          {
+            "speaker": "clinician",
+            "text": "Are you sleeping badly?",
+            "note": "Closed. There is only one word coming back."
+          },
+          {
+            "speaker": "patient",
+            "text": "Yeah."
+          },
+          {
+            "speaker": "clinician",
+            "text": "Tell me what your nights have been like.",
+            "note": "Open. Now they choose what matters."
+          },
+          {
+            "speaker": "patient",
+            "text": "I get in bed around ten and then I just lie there. My brain starts going through everything I didn't finish. Some nights it's one in the morning before I drop off."
+          },
+          {
+            "speaker": "clinician",
+            "text": "So you're lying there for hours with your brain running. That sounds exhausting.",
+            "note": "A reflection — say back what you heard. It costs one sentence and buys a lot of trust."
+          },
+          {
+            "speaker": "patient",
+            "text": "It really is. I didn't think anyone would get that."
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "Which of these is an open-ended question?",
+          "options": [
+            "Have you been feeling anxious?",
+            "What has the worry been like for you?",
+            "Do you sleep well?"
+          ],
+          "answer": 1,
+          "explain": "It invites a story rather than a yes or a no."
+        },
+        {
+          "q": "What is a reflection?",
+          "options": [
+            "Saying back what you heard, in your own words",
+            "Giving your opinion about what they said",
+            "Writing it down for later"
+          ],
+          "answer": 0,
+          "explain": "Reflections show you were listening and give the person a chance to correct you."
+        },
+        {
+          "q": "When is a closed question genuinely useful?",
+          "options": [
+            "Never — always ask open questions",
+            "When you need one specific fact you're missing",
+            "At the very start of a visit"
+          ],
+          "answer": 1,
+          "explain": "Closed questions are fine for pinning down details. They just make a poor default."
+        }
+      ],
+      "try_this": "Pick one closed question you were about to ask and turn it into a 'tell me about…' instead. Then reflect back one thing they say."
+    },
+    {
+      "key": "rapport",
+      "title": "Building Rapport in the First Five Minutes",
+      "minutes": 5,
+      "what_it_is": "Rapport is the feeling that the person across from you is on your side. Most of it is built in the first few minutes, before you have asked a single clinical question.",
+      "why_it_helps": "People hold back from strangers, and holding back is exactly what you cannot afford. Someone who feels safe with you will tell you the thing they weren't going to mention.",
+      "example": {
+        "intro": "Four small moves, all in the first minute.",
+        "turns": [
+          {
+            "speaker": "clinician",
+            "text": "Hi, come on in. I'm glad you came. Is it Marcus?",
+            "note": "Greet, and use their name."
+          },
+          {
+            "speaker": "patient",
+            "text": "Yeah, Marcus. Thanks for seeing me."
+          },
+          {
+            "speaker": "clinician",
+            "text": "Before we get into anything — how are you doing just sitting here right now?",
+            "note": "Acknowledge the moment they're in, not the problem you're here for."
+          },
+          {
+            "speaker": "patient",
+            "text": "Honestly? A bit nervous. I've never done this before."
+          },
+          {
+            "speaker": "clinician",
+            "text": "That makes complete sense. Most people are. We can go at whatever pace you want.",
+            "note": "Normalise, then hand back control."
+          },
+          {
+            "speaker": "patient",
+            "text": "Okay. That helps, actually."
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "What should come first in a visit?",
+          "options": [
+            "The list of symptoms",
+            "A greeting and a moment of ordinary human contact",
+            "The safety questions"
+          ],
+          "answer": 1,
+          "explain": "Everything else works better once the person feels met."
+        },
+        {
+          "q": "Why does using someone's name matter?",
+          "options": [
+            "It helps you remember it",
+            "It signals they are a person to you, not a case",
+            "It is required for the note"
+          ],
+          "answer": 1,
+          "explain": "Small signals of recognition do a lot of the work of rapport."
+        },
+        {
+          "q": "A patient says they're nervous. What's the strongest response?",
+          "options": [
+            "Don't be nervous, this is easy.",
+            "That makes sense — most people are. We'll go at your pace.",
+            "Let's start with your symptoms then."
+          ],
+          "answer": 1,
+          "explain": "Normalising the feeling beats arguing with it or ignoring it."
+        }
+      ],
+      "try_this": "Before your first real question, say hello, use their name, and ask how they're doing right now."
+    },
+    {
+      "key": "cbt-basics",
+      "title": "Cognitive Behavioral Therapy — Thoughts, Feelings, Behaviors",
+      "minutes": 8,
+      "what_it_is": "CBT is built on one idea: thoughts, feelings, and behaviors are hooked together in a loop. Change any one of them and the other two shift.",
+      "why_it_helps": "It gives you somewhere to push. You usually cannot talk someone out of a feeling directly — but you can look at the thought underneath it, or the behavior keeping it going.",
+      "example": {
+        "intro": "The same loop, drawn out from one patient's week.",
+        "turns": [
+          {
+            "speaker": "patient",
+            "text": "I skipped the planning meeting again. I just couldn't face it."
+          },
+          {
+            "speaker": "clinician",
+            "text": "What was going through your mind right before you decided not to go?",
+            "note": "Hunting for the thought."
+          },
+          {
+            "speaker": "patient",
+            "text": "That everyone would notice I hadn't finished the schedule and think I'm not up to the job."
+          },
+          {
+            "speaker": "clinician",
+            "text": "And how did that thought leave you feeling?",
+            "note": "Naming the feeling."
+          },
+          {
+            "speaker": "patient",
+            "text": "Sick, honestly. Really anxious."
+          },
+          {
+            "speaker": "clinician",
+            "text": "So the thought led to the feeling, and the feeling led to skipping. Does skipping make the next meeting easier or harder?",
+            "note": "Showing the loop closing."
+          },
+          {
+            "speaker": "patient",
+            "text": "...Harder. Because now I've missed two."
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "What are the three parts of the CBT loop?",
+          "options": [
+            "Past, present, future",
+            "Thoughts, feelings, behaviors",
+            "Sleep, appetite, energy"
+          ],
+          "answer": 1,
+          "explain": "Each one feeds the other two."
+        },
+        {
+          "q": "Someone avoids something scary and feels better right away. What happens next time?",
+          "options": [
+            "It gets easier, because they had a break",
+            "It gets harder, because avoiding taught the brain it was dangerous",
+            "Nothing changes"
+          ],
+          "answer": 1,
+          "explain": "Relief now, bigger fear later. This is why avoidance keeps anxiety alive."
+        },
+        {
+          "q": "Best question for finding the thought behind a feeling?",
+          "options": [
+            "Why do you feel that way?",
+            "What was going through your mind right then?",
+            "Have you tried not thinking about it?"
+          ],
+          "answer": 1,
+          "explain": "'Why' asks for a theory. 'What was going through your mind' asks for the actual thought."
+        }
+      ],
+      "try_this": "When a patient describes something they avoided, ask what went through their mind right before."
+    },
+    {
+      "key": "cognitive-distortions",
+      "title": "Identifying Cognitive Distortions",
+      "minutes": 7,
+      "what_it_is": "Cognitive distortions are the shortcuts a stressed brain takes — patterns of thinking that feel true and aren't quite. Everybody has them. They get louder under pressure.",
+      "why_it_helps": "Once someone can name the pattern, it loses some of its authority. 'I'm catastrophising' is a much easier thought to argue with than 'everything is about to go wrong.'",
+      "example": {
+        "intro": "Five of the common ones, and what they sound like out loud.",
+        "turns": [
+          {
+            "speaker": "patient",
+            "text": "If I mess up this concert, my whole career is over.",
+            "note": "Catastrophising — jumping to the worst possible ending."
+          },
+          {
+            "speaker": "patient",
+            "text": "I always ruin everything.",
+            "note": "All-or-nothing thinking — no middle ground exists."
+          },
+          {
+            "speaker": "patient",
+            "text": "She didn't say hi, so she must think I'm useless.",
+            "note": "Mind reading — assuming you know what someone thinks."
+          },
+          {
+            "speaker": "patient",
+            "text": "I got nine things done and forgot one, so the day was a waste.",
+            "note": "Mental filter — only the bad thing counts."
+          },
+          {
+            "speaker": "clinician",
+            "text": "You got nine things done. What would you say to a friend who told you that day was a waste?",
+            "note": "You don't have to argue. Just widen the frame."
+          },
+          {
+            "speaker": "patient",
+            "text": "I'd tell them that's ridiculous. ...Okay, I hear it."
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "'I always mess everything up.' Which distortion is this?",
+          "options": [
+            "Mind reading",
+            "All-or-nothing thinking",
+            "Catastrophising"
+          ],
+          "answer": 1,
+          "explain": "Always, everything, never — absolute words are the tell."
+        },
+        {
+          "q": "What's the point of naming a distortion?",
+          "options": [
+            "To show the patient they're wrong",
+            "To help them see the thought as a thought rather than a fact",
+            "To include it in the note"
+          ],
+          "answer": 1,
+          "explain": "Naming creates a little distance. Winning the argument isn't the goal."
+        },
+        {
+          "q": "A gentle way to challenge a harsh thought is to ask:",
+          "options": [
+            "What would you say to a friend who said that?",
+            "Do you really believe that?",
+            "Isn't that a bit dramatic?"
+          ],
+          "answer": 0,
+          "explain": "People are far kinder to friends than to themselves, and they notice the gap."
+        }
+      ],
+      "try_this": "Listen for an absolute word — always, never, everyone, nothing. Ask about it gently when you hear one."
+    },
+    {
+      "key": "motivational-interviewing",
+      "title": "Motivational Interviewing — Rolling With Resistance",
+      "minutes": 7,
+      "what_it_is": "Motivational interviewing is a way of talking with someone who is stuck between wanting to change and not wanting to. The core move is to stop pushing — because pushing makes people defend the other side.",
+      "why_it_helps": "When you argue for change, the person is left to argue against it, and people believe their own arguments. Rolling with resistance hands them back the job of persuading themselves.",
+      "example": {
+        "intro": "The same patient, pushed and then not pushed.",
+        "turns": [
+          {
+            "speaker": "clinician",
+            "text": "You really should book the flight. Driving nineteen hours isn't sustainable.",
+            "note": "Pushing. Watch what it produces."
+          },
+          {
+            "speaker": "patient",
+            "text": "You don't understand, driving is fine. It's honestly not a big deal."
+          },
+          {
+            "speaker": "clinician",
+            "text": "It sounds like driving works for you, and it's also costing you jobs. What do you make of that?",
+            "note": "Rolling with it. Both halves of what she said, no argument."
+          },
+          {
+            "speaker": "patient",
+            "text": "…Yeah. I turned down four this year. I keep telling myself it's fine, but four is a lot."
+          },
+          {
+            "speaker": "clinician",
+            "text": "What would need to be different for that number to be smaller next year?",
+            "note": "Now she's the one arguing for change."
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "What usually happens when you argue for change?",
+          "options": [
+            "The person agrees faster",
+            "The person argues the other side and believes it more",
+            "Nothing much"
+          ],
+          "answer": 1,
+          "explain": "People convince themselves with whatever they hear themselves say."
+        },
+        {
+          "q": "'Rolling with resistance' means:",
+          "options": [
+            "Agreeing that nothing should change",
+            "Not pushing back, and reflecting both sides of what they said",
+            "Changing the subject"
+          ],
+          "answer": 1,
+          "explain": "You hold both halves up and let them look at the gap."
+        },
+        {
+          "q": "Which question best invites the patient to argue for change?",
+          "options": [
+            "Don't you think you should try?",
+            "What would need to be different for that to change?",
+            "Why haven't you done it yet?"
+          ],
+          "answer": 1,
+          "explain": "It's open, it's forward-looking, and it puts them in charge of the answer."
+        }
+      ],
+      "try_this": "When a patient pushes back, don't correct them. Reflect both sides — 'it sounds like X, and also Y' — and ask what they make of it."
+    },
+    {
+      "key": "soap-note",
+      "title": "How to Write a SOAP Note",
+      "minutes": 6,
+      "what_it_is": "A SOAP note is the standard way clinicians write down a visit. Four sections: Subjective, Objective, Assessment, Plan. Every visit you finish here produces one automatically — this lesson is about reading it properly.",
+      "why_it_helps": "The note is the memory of the visit. It is also an honest report card on your interview: it can only hold what you actually asked about. A thin note means thin questions, not a boring patient.",
+      "example": {
+        "intro": "What belongs in each section.",
+        "turns": [
+          {
+            "speaker": "note",
+            "text": "SUBJECTIVE — what the patient told you, in their words.",
+            "note": "'Reports eight months of daily worry, worse since taking on the marching band.'"
+          },
+          {
+            "speaker": "note",
+            "text": "OBJECTIVE — what you observed directly.",
+            "note": "In a typed visit there's no exam, so this section is thin on purpose. In a real room it would include how someone looked and sounded."
+          },
+          {
+            "speaker": "note",
+            "text": "ASSESSMENT — your summary of the pattern.",
+            "note": "'Picture is consistent with long-running, generalised worry affecting work.' A summary, not a label."
+          },
+          {
+            "speaker": "note",
+            "text": "PLAN — what happens next.",
+            "note": "'Follow up in three weeks; discuss what has helped before.'"
+          }
+        ]
+      },
+      "quiz": [
+        {
+          "q": "The patient says 'I've been worried for months.' Which section?",
+          "options": [
+            "Subjective",
+            "Objective",
+            "Plan"
+          ],
+          "answer": 0,
+          "explain": "Subjective is what they tell you."
+        },
+        {
+          "q": "Why is Objective so short in these practice visits?",
+          "options": [
+            "It isn't important",
+            "The visit is typed, so there's nothing you can observe directly",
+            "It gets filled in later"
+          ],
+          "answer": 1,
+          "explain": "Objective means what a clinician can see and hear in the room. Typing removes almost all of it."
+        },
+        {
+          "q": "Your note came out short. What does that usually mean?",
+          "options": [
+            "The patient didn't have much going on",
+            "There were questions you didn't get to ask yet",
+            "The note was written badly"
+          ],
+          "answer": 1,
+          "explain": "The note can only hold what the visit uncovered. That's the whole point of it."
+        }
+      ],
+      "try_this": "After your next visit, read the Gaps section first. Pick one question from it and ask it in your very next visit."
+    }
+  ]
+}

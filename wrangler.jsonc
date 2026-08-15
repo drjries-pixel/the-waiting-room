@@ -1,0 +1,44 @@
+{
+  // The Waiting Room — a psychiatry practice simulator.
+  //
+  // ACCOUNT ISOLATION: deploy this into a Cloudflare account dedicated to this
+  // project, not one shared with production infrastructure. One login can own
+  // several accounts — same login is fine, same account is not.
+  // Run `wrangler whoami` and confirm the account before the first deploy.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "the-waiting-room",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Paste the account's ID here before the first deploy. Pinning it stops any
+  // wrangler wrapper from silently targeting a different account.
+  "account_id": "REPLACE_WITH_ACCOUNT_ID",
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "waiting-room",
+      // Paste the ID printed by `wrangler d1 create waiting-room`.
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+
+  "vars": {
+    // Parent notification for the pause card. Leave empty to disable (default).
+    // Set to an HTTPS endpoint to receive a silent, content-free ping.
+    "PARENT_ALERT_WEBHOOK": ""
+  },
+
+  "observability": { "enabled": true }
+
+  // Secrets (set with `wrangler secret put <NAME>`, never in this file):
+  //   ANTHROPIC_API_KEY  - server-side model calls
+  //   SESSION_SECRET     - HMAC key for the session cookie (32+ random bytes)
+}

@@ -1,0 +1,25 @@
+{
+  "name": "the-waiting-room",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "//": "wrangler dev/deploy/secret/tail are deliberately NOT npm scripts. This machine is Windows ARM64, where those must run inside WSL — see README 'Running it'. `npm run check` only bundles, which works fine Windows-side.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "vite build && wrangler deploy --dry-run --outdir .wrangler/dryrun",
+    "hash": "node scripts/hash-passcode.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.117.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.1",
+    "wrangler": "^4.123.0"
+  }
+}

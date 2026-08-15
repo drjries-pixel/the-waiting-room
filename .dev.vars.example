@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local development. .dev.vars is gitignored.
+# In production these are Worker secrets: `wrangler secret put ANTHROPIC_API_KEY`
+
+ANTHROPIC_API_KEY=sk-ant-...
+SESSION_SECRET=generate-32-plus-random-bytes-here

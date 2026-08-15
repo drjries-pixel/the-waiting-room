@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+
+/* Handoff §12 — calm, uncluttered, warm. Quiet clinic office, not video game. */
+@theme {
+  --color-paper: #faf8f5;
+  --color-card: #ffffff;
+  --color-ink: #2e2a26;
+  --color-muted: #6e665d;
+  --color-line: #e8e2d9;
+  --color-sage: #7c9a82;
+  --color-sage-deep: #55755c;
+  --color-sage-soft: #edf3ed;
+  --color-dusty: #7f96ac;
+  --color-dusty-soft: #eef2f6;
+  --color-warn: #b4553f;
+
+  /* System stacks only — no network font fetch, nothing to block offline. */
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --radius-soft: 14px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Visible focus for keyboard users, everywhere. WCAG AA. */
+:focus-visible {
+  outline: 2px solid var(--color-sage-deep);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Gentle fades only, ≤200ms — and none at all if the reader asked for none. */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: riseIn 180ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keep the chat input clear of the iOS home indicator. */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
