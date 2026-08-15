@@ -61,10 +61,23 @@ const FORBIDDEN = [
   // Note the reflexives cover every person, not just "myself". Notes and
   // feedback are written in the third person, so "a plan to hurt himself" has
   // to be caught just as surely as "I want to hurt myself".
-  ['self_harm', /\b(suicid\w*|kill (?:myself|yourself|himself|herself|themselves)|end (?:it all|my life|your life)|take my own life|self[-\s]?harm|cutting (?:my|him|her|them)sel(?:f|ves)|(?:hurt|harm)(?:ing|ed)?\s+(?:my|him|her|them|your)sel(?:f|ves)|not want(?:ing)? to (?:be here|wake up|live)|better off dead|no reason to live)\b/i],
-  ['violence', /\b(murder\w*|stab\w*|shoot(?:ing)?|shot (?:him|her|them)|gun|knife|weapon|strangl\w*|choke(?:d|ing)?|blood(?:y|ied)|corpse|died|dead|death|passed away|funeral)\b/i],
+  ['self_harm', /\b(suicid\w*|kill (?:myself|yourself|himself|herself|themselves)|end (?:it all|my life|your life)|take my own life|self[-\s]?harm|cutting (?:my|him|her|them)sel(?:f|ves)|(?:hurt|harm)(?:ing|ed)?\s+(?:my|him|her|them|your)sel(?:f|ves)|not want(?:ing)? to (?:be here|wake up|live)|better off dead|(?:wish|want)\w*\s+(?:i (?:was|were)|to be)\s+dead|no reason to live)\b/i],
+  // Death terms need a person attached. Bare "dead"/"died"/"death" caught
+  // "dead tired", "work is dead" and "my phone died" — ordinary idiom, and
+  // exactly the register a low-mood patient speaks in. Measured at a 25% false
+  // positive rate on depression vocabulary before this was narrowed. A false
+  // positive here silently replaces a real reply with a canned line, so the
+  // idioms matter as much as the real cases do.
+  // "choke" was dropped for the same reason: "I choked up" is a normal thing to
+  // say in a psychiatric interview. strangl* still covers the violent sense.
+  [
+    'violence',
+    /\b(murder\w*|stab\w*|shoot(?:ing)?|shot (?:him|her|them)|firearm|pistol|rifle|shotgun|handgun|weapon|threaten\w*|strangl\w*|blood(?:y|ied)|corpse|passed away|funeral|death of|(?:he|she|they|someone|somebody|my (?:mom|mum|mother|dad|father|husband|wife|son|daughter|sister|brother|friend|partner|grandma|grandpa|grandmother|grandfather|uncle|aunt|cousin))\s+(?:died|passed))\b/i,
+  ],
   ['abuse', /\b(abus\w*|molest\w*|assault\w*|rape|raped|beat(?:s|en|ing)? me|hit me|hurt me|touched me|trauma\w*|ptsd|flashback\w*)\b/i],
-  ['substance', /\b(alcohol|drink(?:ing)? (?:too much|a lot|heavily)|drunk|booze|beer|wine|vodka|whiskey|hangover|weed|marijuana|cannabis|cocaine|heroin|meth|opioid\w*|pills? to (?:cope|relax|sleep)|smok(?:e|ing) (?:cigarettes?|a pack)|vap(?:e|ing)|nicotine|withdrawal|relapse|sober|rehab)\b/i],
+  // "a lot" removed: "drinking a lot more tea" is not a substance disclosure.
+  // "too much" and "heavily" still catch the real thing.
+  ['substance', /\b(alcohol|drink(?:ing|s)? (?:too much|heavily)|drunk|booze|beer|wine|vodka|whiskey|hangover|weed|marijuana|cannabis|cocaine|heroin|meth|opioid\w*|pills? to (?:cope|relax|sleep)|smok(?:e|ing) (?:cigarettes?|a pack)|vap(?:e|ing)|nicotine|withdrawal|relapse|sober|rehab)\b/i],
   ['eating', /\b(anorex\w*|bulimi\w*|purg(?:e|ing)|binge(?:ing)?|throw(?:ing)? up (?:after|my food)|calorie\w*|starv(?:e|ing) myself|skip(?:ping)? meals to|too fat|too thin|gained \d+ pounds|lost \d+ pounds|my weight)\b/i],
   ['sexual', /\b(sex\w*|porn\w*|nude|naked|aroused|intimacy issues|affair|cheated on)\b/i],
   ['psychosis', /\b(voices? (?:telling|told|in my head)|command(?:ing)? me to|they'?re watching me|out to get me|conspir\w*|possessed|demons?)\b/i],
