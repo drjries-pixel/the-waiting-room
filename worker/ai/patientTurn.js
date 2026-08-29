@@ -7,7 +7,7 @@ import { generateFiltered } from './filter.js';
  * Patient turn — handoff §6.2. System prompt order is fixed: persona, then the
  * exclusions, then the safety-screen rule, then style.
  */
-function buildSystem(persona, followUpContext, extraWarning) {
+function buildSystem(persona, followUpContext) {
   const hidden = persona.hidden_history;
   const wontVolunteer = (hidden.what_they_wont_volunteer || []).join(', ');
 
@@ -51,18 +51,26 @@ HOW YOU SPEAK
   If asked what you think you have, say you don't know — that's why you came.
 - Stay warm and cooperative. You are never hostile and you never walk out.
 - If the student says something confusing or off-topic, respond the way a polite
-  person would and gently steer back to how you've been feeling.${extraWarning ? `\n\n${extraWarning}` : ''}`;
+  person would and gently steer back to how you've been feeling.`;
 }
 
 const REGENERATION_WARNING = `REMINDER: your previous attempt broke the absolute
 content rules. Rewrite your reply so it contains none of the forbidden topics.
 Keep it short, plain, and ordinary.`;
 
-/** Transcript entries -> Messages API turns. */
+/**
+ * Transcript entries -> Messages API turns, with a prompt-cache checkpoint on the
+ * newest turn. Each reply then reads the entire prior conversation from cache at
+ * ~0.1× and writes only the delta past the last checkpoint. 1-hour TTL on purpose:
+ * a student thinking between questions routinely pauses longer than the 5-minute
+ * default, and an expired entry means re-paying for the whole transcript.
+ */
 function toMessages(transcript) {
-  return transcript.map((entry) => ({
+  return transcript.map((entry, i) => ({
     role: entry.role === 'clinician' ? 'user' : 'assistant',
-    content: entry.text,
+    content: i === transcript.length - 1
+      ? [{ type: 'text', text: entry.text, cache_control: { type: 'ephemeral', ttl: '1h' } }]
+      : entry.text,
   }));
 }
 
@@ -77,14 +85,30 @@ export async function patientReply({ env, db, profileId, persona, transcript, fo
   const client = makeClient(env);
   const messages = toMessages(transcript);
 
+  // The persona system prompt is byte-stable for the whole session, so it gets its
+  // own cache checkpoint. The regeneration warning rides as a SEPARATE, uncached
+  // block AFTER it — appending it to the cached text would invalidate the session's
+  // prefix on every filter retry. Below Sonnet 5's 1,024-token cumulative minimum
+  // the markers silently no-op; as the transcript grows past it, caching engages on
+  // its own. cache_read/cache_write land in `usage` and are logged for wrangler tail.
+  const systemCore = {
+    type: 'text',
+    text: buildSystem(persona, followUpContext),
+    cache_control: { type: 'ephemeral', ttl: '1h' },
+  };
   const call = async (extraWarning) => {
     const response = await client.messages.create({
       model: MODEL_CONVERSATION,
       max_tokens: MAX_TOKENS_PATIENT_TURN,
       thinking: { type: 'disabled' },
       output_config: { effort: 'low' },
-      system: buildSystem(persona, followUpContext, extraWarning),
+      system: extraWarning ? [systemCore, { type: 'text', text: extraWarning }] : [systemCore],
       messages,
+    });
+    console.log('[patientTurn] cache', {
+      read: response.usage?.cache_read_input_tokens ?? 0,
+      write: response.usage?.cache_creation_input_tokens ?? 0,
+      input: response.usage?.input_tokens ?? 0,
     });
     if (response.stop_reason === 'refusal') return SAFE_FALLBACK_LINE;
     return textOf(response);
